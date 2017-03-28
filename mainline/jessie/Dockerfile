@@ -36,6 +36,10 @@ RUN echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/a
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
+COPY ssh-key/server.crt /root/server.crt
+COPY ssh-key/server.nopwd.key /root/server.key
+COPY nginx.conf /etc/nginx/nginx.conf
+
 EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
